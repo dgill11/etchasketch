@@ -1,0 +1,17 @@
+.apple{
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+  }
+  
+  #grid {
+    width: 1000px;
+    height: 1000px;
+  }
+  
+   #grid>div {
+    height: 15px;
+  }
+  
