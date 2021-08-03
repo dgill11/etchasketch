@@ -17,6 +17,8 @@ document.getElementById("button1").addEventListener("click", function() {
 });
 
 function newgrid(input) {
+    const logicGrid = new Array(input).fill(new Array(input).fill(null));
+    console.log(logicGrid);
     console.log("eventfired2");
     for (let i = 0; i < input; i++) {
         const rowset = document.createElement('div');
@@ -28,7 +30,14 @@ function newgrid(input) {
             rowset.appendChild(block);
         }
     }
-    colorchange();
+    colorchange();   
+}
+
+function randomcolor() {
+    let n = (Math.random() * 0xFFFFF * 100000).toString(16);
+    color = "#" + n.slice(0, 6);
+    console.log(color);
+    return color;
 }
 
 function colorchange() {
@@ -45,8 +54,13 @@ function colorchange() {
             })
         })
     }
+    document.getElementById("RGB").addEventListener("click", function() {
+        for (let x = 0; x < items.length; x++) {
+            items[x].addEventListener("mouseover", function() {
+                console.log("newcolor");
+                randomcolor();
+                items[x].style.background = randomcolor();
+            })
+        }
+    })
 }
-
-
-
-
