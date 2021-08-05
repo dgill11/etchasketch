@@ -9,10 +9,12 @@ document.getElementById("button1").addEventListener("click", function() {
         newgrid(input);
         console.log("eventfired");
         document.getElementById("button1").innerHTML = "Change Dimensions";
+        // Button text is changed after initial user input.
     }
     else {
         alert("Enter a valid input");
         console.log("broken");
+        // Logs console if user input is invalid,
     }
 });
 
@@ -23,11 +25,15 @@ function newgrid(input) {
     for (let i = 0; i < input; i++) {
         const rowset = document.createElement('div');
         grid.appendChild(rowset);
-        console.log("eventfired3")
+        console.log("eventfired3");
         for (let y = 0; y < input; y++ ) {
             const block = document.createElement('div');
             block.className = "apple";
             rowset.appendChild(block);
+            block.addEventListener("mouseover", () => {
+                logicGrid[i][y] = 0;
+                console.log("hovered");
+            })
         }
     }
     colorchange();   
@@ -39,7 +45,7 @@ function randomcolor() {
     console.log(color);
     return color;
 }
-
+// Function that controls the color of the board depending on what is clicked 
 function colorchange() {
     items = document.getElementsByClassName("apple");
     console.log(items);
@@ -54,6 +60,7 @@ function colorchange() {
             })
         })
     }
+// Changing color each time a new div is hovered over 
     document.getElementById("RGB").addEventListener("click", function() {
         for (let x = 0; x < items.length; x++) {
             items[x].addEventListener("mouseover", function() {
@@ -63,4 +70,12 @@ function colorchange() {
             })
         }
     })
+    document.getElementById("clear1").addEventListener("click", function () {
+        for (let y = 0; y < items.length; y++) {
+            items[y].style.background = "#FFFFFF";
+            console.log("board cleared");
+        }
+    })
 }
+
+// Changing the whole board and its divs to white 
