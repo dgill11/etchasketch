@@ -43,7 +43,25 @@ function newgrid(input) {
 
         grid.appendChild(rowset);
     }
-    // colorchange();
+
+    // Sending stringified array to localStorage when clicking 
+    function saving() {
+        console.log("savebuttonclicked");
+        let myJSON = JSON.stringify(logicGrid);
+        localStorage.setItem('stringifiedlogicgrid', myJSON);
+        console.log(localStorage);
+        if (localStorage != null) {
+            console.log("There is something saved.");
+        }
+    }
+
+    if (localStorage == null) {
+        // Checks if the storage is already empty, and then proceedes to autosave it if it is empty;
+        window.onbeforeunload = () => {
+        saving();
+        alert("Your drawing has been autosaved.");
+        }
+    }
 }
 
 function randomcolor() {
