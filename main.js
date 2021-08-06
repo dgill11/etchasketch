@@ -1,10 +1,10 @@
 const defaultsize = 16;
 const grid = document.querySelector("#grid");
 
-defaultcolor = "#000000";
+let defaultcolor = "#000000";
 
 document.getElementById("button1").addEventListener("click", function () {
-    var input = parseInt(prompt("Enter a number between 2 and 24"));
+    let  input = parseInt(prompt("Enter a number between 2 and 24"));
     if (input > 2 && input <= 24) {
         console.log("generating grid with input: " + input); // Use more descriptive logs, was "eventfired"
         newgrid(input);
@@ -16,9 +16,9 @@ document.getElementById("button1").addEventListener("click", function () {
         // Logs console if user input is invalid,
     }
 });
+const logicGrid = [];
 
 function newgrid(input) {
-    const logicGrid = [];
 
     window.logicGrid = logicGrid;
 
@@ -40,28 +40,10 @@ function newgrid(input) {
 
             rowset.appendChild(block);
         }
-
         grid.appendChild(rowset);
+        console.log(logicGrid);
     }
-
     // Sending stringified array to localStorage when clicking 
-    function saving() {
-        console.log("savebuttonclicked");
-        let myJSON = JSON.stringify(logicGrid);
-        localStorage.setItem('stringifiedlogicgrid', myJSON);
-        console.log(localStorage);
-        if (localStorage != null) {
-            console.log("There is something saved.");
-        }
-    }
-
-    if (localStorage == null) {
-        // Checks if the storage is already empty, and then proceedes to autosave it if it is empty;
-        window.onbeforeunload = () => {
-        saving();
-        alert("Your drawing has been autosaved.");
-        }
-    }
 }
 
 function randomcolor() {
@@ -103,6 +85,22 @@ function colorchange() {
             console.log("board cleared");
         }
     });
+}
+
+function saving() {
+    console.log("savebuttonclicked");
+    let myJSON = JSON.stringify(logicGrid);
+    localStorage.setItem('stringifiedlogicgrid', myJSON);
+    console.log(localStorage);
+    if (localStorage != null) {
+        console.log("There is something saved.");
+    }
+}
+
+window.onbeforeunload = () => {
+    if (localStorage.getItem('stringifiedlogicgrid') == null) {
+        return;
+    }
 }
 
 // Changing the whole board and its divs to white
