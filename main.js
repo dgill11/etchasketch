@@ -17,6 +17,7 @@ document.getElementById("button1").addEventListener("click", function () {
     }
 });
 const logicGrid = [];
+load();
 
 function newgrid(input) {
 
@@ -97,10 +98,24 @@ function saving() {
     }
 }
 
+// Saves the grid 
+
 window.onbeforeunload = () => {
+    saving();
     if (localStorage.getItem('stringifiedlogicgrid') == null) {
         return;
+        // Gives a "are you sure you want to leave" type of thin 
     }
 }
 
-// Changing the whole board and its divs to white
+function load() {
+    if (localStorage != null) {
+        var stored = JSON.parse(localStorage.getItem('stringifiedlogicgrid'));
+        console.log(stored); 
+        var arraylength = stored.length;
+        console.log(arraylength);
+        // Gets dimensions of stored array
+    }
+}
+
+// This function wll get the dimensions of a previously saved grid
